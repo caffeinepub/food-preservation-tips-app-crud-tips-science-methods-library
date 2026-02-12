@@ -1,0 +1,19 @@
+{
+  "frontend/src/App.tsx": "Main application component that handles authentication state, profile setup, and view routing between My Tips and Science Library screens.",
+  "frontend/src/components/layout/AppShell.tsx": "Shared layout component providing header with logo and login button, navigation tabs, main content area, and footer with attribution.",
+  "frontend/src/components/auth/LoginButton.tsx": "Authentication button component that handles Internet Identity login/logout with proper state management and query cache clearing.",
+  "frontend/src/components/auth/ProfileSetupModal.tsx": "Modal dialog that prompts new users to enter their name on first login, preventing modal flash with proper loading states.",
+  "frontend/src/components/common/ErrorState.tsx": "Reusable error display component showing user-friendly error messages with optional retry action.",
+  "frontend/src/components/common/EmptyState.tsx": "Reusable empty state component displaying title, description, optional illustration, and call-to-action button.",
+  "frontend/src/screens/MyTips/MyTipsScreen.tsx": "Main screen for displaying user's food preservation tips in a card grid with create, edit, and detail view navigation.",
+  "frontend/src/screens/MyTips/TipEditor.tsx": "Form component for creating and editing tips with validation, tag management, and proper error handling.",
+  "frontend/src/screens/MyTips/TipDetailPanel.tsx": "Detail view for a single tip showing full content, tags, timestamps, and edit/delete actions with confirmation dialog.",
+  "frontend/src/screens/ScienceLibrary/ScienceLibraryScreen.tsx": "Screen displaying science preservation methods grouped by category with card-based navigation to detail views.",
+  "frontend/src/screens/ScienceLibrary/ScienceMethodDetailPanel.tsx": "Detail view for science explanations showing summary, optional steps, and safety notes with clear typography.",
+  "frontend/src/hooks/queries/useUserProfile.ts": "React Query hooks for fetching and saving user profiles with proper actor dependency handling to prevent modal flash.",
+  "frontend/src/hooks/queries/useMyTips.ts": "React Query hooks for fetching user tips and individual tip details with proper caching and enabled guards.",
+  "frontend/src/hooks/queries/useTipMutations.ts": "React Query mutation hooks for creating, updating, and deleting tips with automatic cache invalidation.",
+  "frontend/src/hooks/queries/useScienceLibrary.ts": "React Query hooks for fetching science explanations with 5-minute cache time for optimal performance.",
+  "frontend/src/index.css": "Global styles defining warm kitchen notebook color palette using OKLCH with earthy terracotta, cream, and sage tones for both light and dark modes.",
+  "frontend/tailwind.config.js": "Tailwind configuration extending theme with warm color tokens, custom shadows, and serif font family for kitchen notebook aesthetic."
+}

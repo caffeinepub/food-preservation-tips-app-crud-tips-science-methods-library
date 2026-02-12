@@ -1,2 +1,3 @@
-# food-preservation-tips-app-crud-tips-science-methods-library
-Exported from Caffeine project: Food Preservation Tips App: CRUD tips + science methods library
+## Food Preservation Tips App: CRUD tips + science methods library
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`

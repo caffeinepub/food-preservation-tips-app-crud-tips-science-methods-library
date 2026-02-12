@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "App for users to write and save food preservation tips/secrets, and view simple science explanations/methods for improving food safety and longevity.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Warm kitchen notebook-style app logo: a simple line-art jar and leaf with hand-drawn feel on a cream background (app-logo.dim_512x512.png)\n- Wide hero banner illustration of a pantry shelf with jars, labels, and subtle texture in earthy tones (hero-pantry.dim_1600x600.png)\n- Minimal icon set (3 icons) in consistent line style: jar, snowflake, salt (icons-set.dim_384x128.png)",
+  "existing_features": [
+    {
+      "id": "feature-create-a-clean-easy-to-use-frontend-ui-that-lets-users-browse-their-saved-tips-and-browse-the-science-methods-library-with-separate-navigation-entries-for-my-tips-and-science-library",
+      "title": "Create a clean, easy-to-use frontend UI that lets users browse their saved tips and browse the science methods library, with separate navigation entries for “My Tips” and “Science Library”.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-frontend-flows-to-create-and-edit-a-tip-including-a-form-with-title-content-and-tags-plus-actions-to-save-changes-and-delete-a-tip",
+      "title": "Add frontend flows to create and edit a tip, including a form with title, content, and tags, plus actions to save changes and delete a tip.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-use-react-query-for-all-backend-data-fetching-mutations-and-ensure-caches-are-invalidated-refreshed-appropriately-after-create-update-delete-operations-for-tips",
+      "title": "Use React Query for all backend data fetching/mutations and ensure caches are invalidated/refreshed appropriately after create/update/delete operations for tips.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-define-and-apply-a-consistent-visual-theme-for-the-app-colors-typography-spacing-and-component-styling-with-a-distinct-warm-kitchen-notebook-aesthetic-using-earthy-tones-avoid-blue-purple-across-all-screens",
+      "title": "Define and apply a consistent visual theme for the app (colors, typography, spacing, and component styling) with a distinct “warm kitchen notebook” aesthetic using earthy tones (avoid blue/purple) across all screens.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-frontend-static-assets-integration-for-generated-images-by-rendering-them-from-frontend-public-assets-generated-e-g-logo-hero-section-icons-and-using-them-in-the-header-and-or-empty-states-without-routing-images-through-the-backend",
+      "title": "Add a frontend static-assets integration for generated images by rendering them from frontend/public/assets/generated (e.g., logo/hero/section icons) and using them in the header and/or empty states without routing images through the backend.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Allow users to create, edit, and save their own food preservation tips/secrets.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Provide a section/library of simple science explanations and methods for preserving food and improving food resources.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Enable browsing/viewing of saved tips and science methods in a clean, easy-to-use interface.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Implement backend data model and API to allow each authenticated user (by Principal) to create, read, update, and delete their own food preservation tips/secrets, including fields: id, title, content, optional tags, createdAt, updatedAt.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Implement backend API to provide a read-only library of simple science explanations and methods for preserving food and improving food resources. Include fields: id, title, summary, steps (optional), safetyNotes (optional), and category.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "status": "pending"
+    }
+  ],
+  "projectName": "Food Preservation Tips App: CRUD tips + science methods library",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

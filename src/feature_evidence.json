@@ -1,0 +1,121 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-create-a-clean-easy-to-use-frontend-ui-that-lets-users-browse-their-saved-tips-and-browse-the-science-methods-library-with-separate-navigation-entries-for-my-tips-and-science-library",
+      "featureTitle": "Create a clean, easy-to-use frontend UI that lets users browse their saved tips and browse the science methods library, with separate navigation entries for “My Tips” and “Science Library”.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/auth/LoginButton.tsx",
+        "frontend/src/components/auth/ProfileSetupModal.tsx",
+        "frontend/src/components/layout/AppShell.tsx",
+        "frontend/src/screens/MyTips/MyTipsScreen.tsx",
+        "frontend/src/screens/MyTips/TipDetailPanel.tsx",
+        "frontend/src/screens/ScienceLibrary/ScienceLibraryScreen.tsx",
+        "frontend/src/screens/ScienceLibrary/ScienceMethodDetailPanel.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-frontend-flows-to-create-and-edit-a-tip-including-a-form-with-title-content-and-tags-plus-actions-to-save-changes-and-delete-a-tip",
+      "featureTitle": "Add frontend flows to create and edit a tip, including a form with title, content, and tags, plus actions to save changes and delete a tip.",
+      "files": [
+        "frontend/src/screens/MyTips/MyTipsScreen.tsx",
+        "frontend/src/screens/MyTips/TipDetailPanel.tsx",
+        "frontend/src/screens/MyTips/TipEditor.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-use-react-query-for-all-backend-data-fetching-mutations-and-ensure-caches-are-invalidated-refreshed-appropriately-after-create-update-delete-operations-for-tips",
+      "featureTitle": "Use React Query for all backend data fetching/mutations and ensure caches are invalidated/refreshed appropriately after create/update/delete operations for tips.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/common/EmptyState.tsx",
+        "frontend/src/components/common/ErrorState.tsx",
+        "frontend/src/hooks/queries/useMyTips.ts",
+        "frontend/src/hooks/queries/useScienceLibrary.ts",
+        "frontend/src/hooks/queries/useTipMutations.ts",
+        "frontend/src/hooks/queries/useUserProfile.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-define-and-apply-a-consistent-visual-theme-for-the-app-colors-typography-spacing-and-component-styling-with-a-distinct-warm-kitchen-notebook-aesthetic-using-earthy-tones-avoid-blue-purple-across-all-screens",
+      "featureTitle": "Define and apply a consistent visual theme for the app (colors, typography, spacing, and component styling) with a distinct “warm kitchen notebook” aesthetic using earthy tones (avoid blue/purple) across all screens.",
+      "files": [
+        "frontend/src/components/layout/AppShell.tsx",
+        "frontend/src/index.css",
+        "frontend/src/screens/MyTips/MyTipsScreen.tsx",
+        "frontend/src/screens/ScienceLibrary/ScienceLibraryScreen.tsx",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-frontend-static-assets-integration-for-generated-images-by-rendering-them-from-frontend-public-assets-generated-e-g-logo-hero-section-icons-and-using-them-in-the-header-and-or-empty-states-without-routing-images-through-the-backend",
+      "featureTitle": "Add a frontend static-assets integration for generated images by rendering them from frontend/public/assets/generated (e.g., logo/hero/section icons) and using them in the header and/or empty states without routing images through the backend.",
+      "files": [
+        "frontend/src/components/common/EmptyState.tsx",
+        "frontend/src/components/layout/AppShell.tsx",
+        "frontend/src/screens/MyTips/MyTipsScreen.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

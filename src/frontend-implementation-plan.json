@@ -1,0 +1,209 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Food Preservation Tips App (Frontend): My Tips + Science Library",
+  "requirements": [
+    {
+      "id": "REQ-3",
+      "summary": "Create a clean UI with navigation between “My Tips” and “Science Library”, each with list + detail views and full loading/empty/error states.",
+      "acceptanceCriteria": [
+        "User can navigate between My Tips and Science Library screens.",
+        "My Tips screen shows a list of the user’s tips and supports opening a tip detail view.",
+        "Science Library screen shows a list of science methods and supports opening a method detail view.",
+        "Loading, empty, and error states are shown for each data view."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire top-level authenticated app shell: add two navigation entries (“My Tips”, “Science Library”), render the corresponding screens, and ensure unauthenticated users are prompted to log in before any data is shown. Use the authorization component guidance (Internet Identity + cache clearing on logout) where applicable; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/layout/AppShell.tsx",
+          "operation": "create",
+          "description": "Create shared layout for header + navigation + main content; include consistent spacing/typography and provide a place to render the generated logo and hero/section imagery. Compose (do not modify) shadcn/ui components for header, buttons, cards, and navigation; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/auth/LoginButton.tsx",
+          "operation": "create",
+          "description": "Add a Login/Logout button using Internet Identity via the authorization component pattern; on logout clear React Query caches (queryClient.clear()) to remove user-scoped data. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/auth/ProfileSetupModal.tsx",
+          "operation": "create",
+          "description": "Prompt for a user name on first login (when getCallerUserProfile returns null) and persist via saveCallerUserProfile; avoid principal display and prevent modal flash per authorization component guidance. Compose shadcn/ui Dialog/Form components; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/screens/MyTips/MyTipsScreen.tsx",
+          "operation": "create",
+          "description": "Implement My Tips screen: list of tips, a way to open detail view, and visible loading/empty/error states. Compose shadcn/ui (Card, Button, Skeleton/Alert equivalents) for UI; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/screens/MyTips/TipDetailPanel.tsx",
+          "operation": "create",
+          "description": "Implement tip detail view for a selected tip (title/content/tags/created/updated) with clear error state when tip is not found. Compose shadcn/ui components; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/screens/ScienceLibrary/ScienceLibraryScreen.tsx",
+          "operation": "create",
+          "description": "Implement Science Library screen: list science methods, filter/group presentation as desired, open detail view, and show loading/empty/error states. Compose shadcn/ui components; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/screens/ScienceLibrary/ScienceMethodDetailPanel.tsx",
+          "operation": "create",
+          "description": "Implement science method detail view (title/summary/category + optional steps and safety notes), with robust loading/error display. Compose shadcn/ui components; verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Add create/edit/delete tip flows with a validated form for title, content, and tags, and update UI after mutations.",
+      "acceptanceCriteria": [
+        "User can create a new tip from My Tips and see it appear in the list after saving.",
+        "User can edit an existing tip and see updates reflected after saving.",
+        "User can delete a tip and see it removed from the list.",
+        "Form validation prevents saving when required fields (title, content) are empty."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/screens/MyTips/TipEditor.tsx",
+          "operation": "create",
+          "description": "Create a Tip create/edit form (title, content, tags) with validation (required title/content), save/cancel controls, and inline field errors; compose shadcn/ui input/textarea/badge/button components. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/screens/MyTips/MyTipsScreen.tsx",
+          "operation": "modify",
+          "description": "Wire create flow (e.g., “New Tip” action) to open TipEditor, wire edit action from detail/list into TipEditor, and wire delete action with confirmation and readable error handling. Compose shadcn/ui components; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/screens/MyTips/TipDetailPanel.tsx",
+          "operation": "modify",
+          "description": "Add edit + delete actions to the tip detail view and integrate with TipEditor and delete flow; ensure user-visible error states on failures. Compose shadcn/ui components; verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Use React Query for all fetching/mutations with correct caching and invalidation for tips and cached science library queries.",
+      "acceptanceCriteria": [
+        "Lists refresh after tip create/update/delete without requiring a full page reload.",
+        "Science library queries are cached and re-used between navigations.",
+        "Errors from backend calls are surfaced to the user in a readable way."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/queries/useMyTips.ts",
+          "operation": "create",
+          "description": "Implement React Query hooks for listing user tips and fetching a single tip using the actor from useActor; include enabled-guards for actor availability and return normalized loading/error states. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/queries/useTipMutations.ts",
+          "operation": "create",
+          "description": "Implement React Query mutations for create/update/delete tip; invalidate/refetch relevant tips queries after each mutation and surface backend errors as readable messages. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/queries/useScienceLibrary.ts",
+          "operation": "create",
+          "description": "Implement React Query hooks for listing science explanations and fetching a single explanation; configure caching so list data is reused across navigations (appropriate staleTime/cacheTime) and provide readable error messages. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/queries/useUserProfile.ts",
+          "operation": "create",
+          "description": "Implement React Query hooks for getCallerUserProfile/saveCallerUserProfile following the authorization component guidance (avoid profile setup modal flash via actor dependency state). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/common/ErrorState.tsx",
+          "operation": "create",
+          "description": "Create a reusable error display component that renders readable messages for React Query failures (including authorization-related traps) and provides optional retry actions. Compose shadcn/ui Alert/Button components; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/common/EmptyState.tsx",
+          "operation": "create",
+          "description": "Create a reusable empty state component used by tips and science screens (supports title/description/action and optional illustration). Compose shadcn/ui Card/Button components; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Ensure logout clears all cached application data (React Query cache) and that views do not issue authenticated data queries until logged in, per authorization component guidance. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Apply a consistent warm kitchen notebook visual theme (earthy tones, cohesive typography/spacing) across all screens.",
+      "acceptanceCriteria": [
+        "All primary screens share consistent typography, color palette, and spacing scale.",
+        "Buttons, inputs, cards, and headings follow a coherent style.",
+        "No default-looking unstyled pages remain."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "create",
+          "description": "Define global theme tokens and base styles to achieve a warm kitchen notebook aesthetic (earthy tones; avoid blue/purple), including background, foreground, card, borders, and typography defaults; ensure consistent spacing and component baseline styling."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Adjust Tailwind theme extensions (as needed) to support the earthy palette and consistent radii/shadows/typography used across the app; keep styling consistent with existing Tailwind + shadcn/ui conventions."
+        },
+        {
+          "path": "frontend/src/components/layout/AppShell.tsx",
+          "operation": "modify",
+          "description": "Apply cohesive layout styling (header, nav, content container) aligned with the warm theme; ensure buttons/inputs/cards/headings look intentional and consistent using composed shadcn/ui components. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/screens/MyTips/MyTipsScreen.tsx",
+          "operation": "modify",
+          "description": "Ensure My Tips screen uses themed components (cards, headings, buttons, inputs) and consistent spacing; remove any default/unstyled appearance by composing shadcn/ui components. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/screens/ScienceLibrary/ScienceLibraryScreen.tsx",
+          "operation": "modify",
+          "description": "Ensure Science Library screen follows the same theme (cards, headings, spacing) and presents optional content (steps/safety notes) with clear typographic hierarchy. Compose shadcn/ui components; verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Integrate generated images as static assets from frontend/public/assets/generated and use them in header and empty states.",
+      "acceptanceCriteria": [
+        "Generated images exist under frontend/public/assets/generated and are referenced directly by the frontend.",
+        "At least a logo and one section illustration/icon are displayed in the UI.",
+        "No backend endpoints are created for serving images."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/app-logo.dim_512x512.png",
+          "operation": "create",
+          "description": "Add generated image asset: warm kitchen notebook-style app logo to be referenced directly by the frontend (static asset)."
+        },
+        {
+          "path": "frontend/public/assets/generated/hero-pantry.dim_1600x600.png",
+          "operation": "create",
+          "description": "Add generated image asset: pantry hero banner to be referenced directly by the frontend (static asset)."
+        },
+        {
+          "path": "frontend/public/assets/generated/icons-set.dim_384x128.png",
+          "operation": "create",
+          "description": "Add generated image asset: icon set (jar, snowflake, salt) to be referenced directly by the frontend (static asset)."
+        },
+        {
+          "path": "frontend/src/components/layout/AppShell.tsx",
+          "operation": "modify",
+          "description": "Render the logo from frontend/public/assets/generated/app-logo.dim_512x512.png in the header and optionally use frontend/public/assets/generated/hero-pantry.dim_1600x600.png as a themed header/section visual. Compose shadcn/ui components; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/common/EmptyState.tsx",
+          "operation": "modify",
+          "description": "Support rendering an illustration/icon and wire at least one empty state to use frontend/public/assets/generated/icons-set.dim_384x128.png (e.g., for My Tips empty state). Compose shadcn/ui components; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/screens/MyTips/MyTipsScreen.tsx",
+          "operation": "modify",
+          "description": "Use the shared EmptyState and display a generated illustration/icon (from frontend/public/assets/generated/icons-set.dim_384x128.png) when the user has no tips; ensure the asset is referenced directly (no backend routing). Verify the component's usage instructions before implementing."
+        }
+      ]
+    }
+  ]
+}

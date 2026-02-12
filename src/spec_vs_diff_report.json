@@ -1,0 +1,109 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-12T12:36:30.848Z",
+  "summary": "The diff adds a new Motoko backend actor and a React + React Query frontend with navigation for “My Tips” and “Science Library”, tip create/edit/delete UI, error/empty/loading states for list screens, and references to generated image assets (logo and icon set). However, several key backend endpoints and seed data are not evidenced due to backend truncation, and there are notable unrequested additions (user profiles/access control/admin-token initialization and a caffeine.ai footer link).",
+  "missing_requirements": [
+    {
+      "id": "REQ-1",
+      "requirement": "Backend exposes query methods to list and get-by-id tips scoped to the caller Principal (no ability to read/modify other users’ tips).",
+      "reason": "The frontend calls `actor.getUserTips(principal)` and `actor.getTip(id)`, but the backend diff excerpt only shows `createTip` and `updateTip` (and a truncated `deleteTip`) and does not show `getUserTips`/`getTip` implementations nor explicit caller-scoping enforcement for reads/writes. Additionally, the frontend’s list API appears parameterized by Principal, which conflicts with the requirement to scope to caller.",
+      "evidence": [
+        "backend/main.mo (truncated; only createTip/updateTip shown, deleteTip truncated)",
+        "frontend/src/hooks/queries/useMyTips.ts (calls actor.getUserTips(principal) and actor.getTip(id))"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "requirement": "Backend provides a seeded, read-only science methods library with at least 8 methods, plus query methods to list and fetch by id.",
+      "reason": "The backend excerpt defines `ScienceExplanation` and an `explanationsState`, but does not show any seeding of at least 8 items or the required query methods (`getAllScienceExplanations`, `getScienceExplanation`). Frontend calls these methods, but backend evidence is not present in the truncated file.",
+      "evidence": [
+        "backend/main.mo (truncated; no seeding or science query methods shown)",
+        "frontend/src/hooks/queries/useScienceLibrary.ts (calls actor.getAllScienceExplanations(), actor.getScienceExplanation(id), actor.getExplanationsByCategory(category))"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "requirement": "Errors from backend calls are surfaced to the user in a readable way during tip create/edit/delete flows.",
+      "reason": "List views show `ErrorState`, but create/update/delete failures inside TipEditor and TipDetailPanel are only logged to console with no user-visible error UI shown in the diff.",
+      "evidence": [
+        "frontend/src/screens/MyTips/TipEditor.tsx (catch logs 'Failed to save tip' only)",
+        "frontend/src/screens/MyTips/TipDetailPanel.tsx (catch logs 'Failed to delete tip' only)"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "requirement": "Generated images exist under frontend/public/assets/generated (logo, hero banner, icon set) and are referenced directly by the frontend.",
+      "reason": "The frontend references `/assets/generated/app-logo.dim_512x512.png` and `/assets/generated/icons-set.dim_384x128.png`, but the diff summary does not include any added files under `frontend/public/assets/generated` (they may be in the omitted files list, but this is not evidenced). Also, the requested hero banner asset is not referenced anywhere in the shown frontend code.",
+      "evidence": [
+        "frontend/src/App.tsx (references /assets/generated/app-logo.dim_512x512.png)",
+        "frontend/src/components/layout/AppShell.tsx (references /assets/generated/app-logo.dim_512x512.png)",
+        "frontend/src/screens/MyTips/MyTipsScreen.tsx (references /assets/generated/icons-set.dim_384x128.png)",
+        "frontend/src/screens/ScienceLibrary/ScienceLibraryScreen.tsx (references /assets/generated/icons-set.dim_384x128.png)"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "User profile system (get/save profile) and a forced profile setup modal gating app usage.",
+      "reason": "BuildRequest does not request user profiles or a profile setup flow; it only mentions authentication if needed and CRUD tips + science library.",
+      "evidence": [
+        "backend/main.mo (defines UserProfile and getCallerUserProfile/getUserProfile/saveCallerUserProfile)",
+        "frontend/src/components/auth/ProfileSetupModal.tsx",
+        "frontend/src/App.tsx (shows ProfileSetupModal based on missing profile)"
+      ]
+    },
+    {
+      "description": "Custom access control / authorization initialization with a secret admin token passed via URL parameter.",
+      "reason": "BuildRequest explicitly disallows third-party auth providers but allows Internet Identity; it does not request an admin-token-based access control system or secret URL parameter initialization.",
+      "evidence": [
+        "backend/main.mo (imports MixinAuthorization, AccessControl; permission checks like hasPermission/isAdmin)",
+        "frontend/src/hooks/useActor.ts (calls actor._initializeAccessControlWithSecret(adminToken) and reads getSecretParameter('caffeineAdminToken'))"
+      ]
+    },
+    {
+      "description": "Footer attribution link to caffeine.ai with tracking parameters.",
+      "reason": "Not requested by the BuildRequest.",
+      "evidence": [
+        "frontend/src/components/layout/AppShell.tsx (footer link to https://caffeine.ai with utm params)"
+      ]
+    },
+    {
+      "description": "Additional science library endpoint for filtering by category (getExplanationsByCategory).",
+      "reason": "REQ-2 only requires list and fetch-by-id; category filtering API is extra beyond the stated acceptance criteria.",
+      "evidence": [
+        "frontend/src/hooks/queries/useScienceLibrary.ts (calls actor.getExplanationsByCategory(category))"
+      ]
+    }
+  ],
+  "confidence": 0.64,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/components/auth/LoginButton.tsx",
+    "frontend/src/components/auth/ProfileSetupModal.tsx",
+    "frontend/src/components/common/EmptyState.tsx",
+    "frontend/src/components/common/ErrorState.tsx",
+    "frontend/src/components/layout/AppShell.tsx",
+    "frontend/src/hooks/queries/useMyTips.ts",
+    "frontend/src/hooks/queries/useScienceLibrary.ts",
+    "frontend/src/hooks/queries/useTipMutations.ts",
+    "frontend/src/hooks/queries/useUserProfile.ts",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/index.css",
+    "frontend/src/main.tsx",
+    "frontend/src/screens/MyTips/MyTipsScreen.tsx",
+    "frontend/src/screens/MyTips/TipDetailPanel.tsx",
+    "frontend/src/screens/MyTips/TipEditor.tsx",
+    "frontend/src/screens/ScienceLibrary/ScienceLibraryScreen.tsx",
+    "frontend/src/screens/ScienceLibrary/ScienceMethodDetailPanel.tsx",
+    "frontend/src/utils/urlParams.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}

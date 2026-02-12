@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 0.625rem;
+        
+        /* Warm kitchen notebook palette - Light mode */
+        --background: 0.98 0.015 45;  /* Warm cream */
+        --foreground: 0.25 0.02 30;   /* Deep brown */
+        
+        --card: 1 0.01 50;            /* Off-white with warmth */
+        --card-foreground: 0.25 0.02 30;
+        
+        --popover: 1 0.01 50;
+        --popover-foreground: 0.25 0.02 30;
+        
+        --primary: 0.52 0.12 35;      /* Terracotta/clay */
+        --primary-foreground: 0.98 0.015 45;
+        
+        --secondary: 0.88 0.04 85;    /* Soft sage green */
+        --secondary-foreground: 0.25 0.02 30;
+        
+        --muted: 0.92 0.02 60;        /* Light tan */
+        --muted-foreground: 0.45 0.02 30;
+        
+        --accent: 0.75 0.08 65;       /* Warm honey */
+        --accent-foreground: 0.25 0.02 30;
+        
+        --destructive: 0.55 0.20 25;  /* Earthy red */
+        --destructive-foreground: 0.98 0.015 45;
+        
+        --border: 0.88 0.02 50;       /* Subtle warm border */
+        --input: 0.88 0.02 50;
+        --ring: 0.52 0.12 35;
+        
+        --chart-1: 0.52 0.12 35;
+        --chart-2: 0.75 0.08 65;
+        --chart-3: 0.88 0.04 85;
+        --chart-4: 0.65 0.10 45;
+        --chart-5: 0.70 0.06 120;
+    }
+
+    .dark {
+        /* Dark mode - warm, cozy kitchen at night */
+        --background: 0.20 0.02 30;   /* Deep warm brown */
+        --foreground: 0.95 0.015 45;  /* Warm off-white */
+        
+        --card: 0.25 0.02 35;         /* Slightly lighter brown */
+        --card-foreground: 0.95 0.015 45;
+        
+        --popover: 0.28 0.02 35;
+        --popover-foreground: 0.95 0.015 45;
+        
+        --primary: 0.65 0.14 35;      /* Lighter terracotta */
+        --primary-foreground: 0.20 0.02 30;
+        
+        --secondary: 0.35 0.04 85;    /* Muted sage */
+        --secondary-foreground: 0.95 0.015 45;
+        
+        --muted: 0.30 0.02 40;        /* Dark tan */
+        --muted-foreground: 0.70 0.02 45;
+        
+        --accent: 0.55 0.10 65;       /* Dimmed honey */
+        --accent-foreground: 0.95 0.015 45;
+        
+        --destructive: 0.60 0.18 25;
+        --destructive-foreground: 0.95 0.015 45;
+        
+        --border: 0.30 0.02 40;
+        --input: 0.30 0.02 40;
+        --ring: 0.65 0.14 35;
+        
+        --chart-1: 0.65 0.14 35;
+        --chart-2: 0.75 0.08 65;
+        --chart-3: 0.45 0.06 85;
+        --chart-4: 0.55 0.12 45;
+        --chart-5: 0.60 0.08 120;
+    }
+
+    * {
+        @apply border-border;
+    }
+    
+    body {
+        @apply bg-background text-foreground;
+        font-feature-settings: "rlig" 1, "calt" 1;
+    }
+}
+

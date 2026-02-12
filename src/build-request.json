@@ -1,0 +1,157 @@
+{
+  "kind": "build_request",
+  "title": "Food Preservation Tips App: CRUD tips + science methods library",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Implement backend data model and API to allow each authenticated user (by Principal) to create, read, update, and delete their own food preservation tips/secrets, including fields: id, title, content, optional tags, createdAt, updatedAt.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Allow users to create, edit, and save their own food preservation tips/secrets."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend exposes update/query methods to create, list, get-by-id, update, and delete tips scoped to the caller Principal.",
+        "Tip IDs are stable and unique per tip.",
+        "createdAt and updatedAt are set server-side.",
+        "A user cannot read or modify another user’s tips (Principal scoping enforced)."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Implement backend API to provide a read-only library of simple science explanations and methods for preserving food and improving food resources. Include fields: id, title, summary, steps (optional), safetyNotes (optional), and category.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Provide a section/library of simple science explanations and methods for preserving food and improving food resources."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend exposes query methods to list science methods and fetch a single method by id.",
+        "Science methods are read-only from the UI (no create/update/delete exposed to normal users).",
+        "At least 8 science methods are available in the library (seeded in code)."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Create a clean, easy-to-use frontend UI that lets users browse their saved tips and browse the science methods library, with separate navigation entries for “My Tips” and “Science Library”.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Enable browsing/viewing of saved tips and science methods in a clean, easy-to-use interface."
+        ]
+      },
+      "acceptanceCriteria": [
+        "User can navigate between My Tips and Science Library screens.",
+        "My Tips screen shows a list of the user’s tips and supports opening a tip detail view.",
+        "Science Library screen shows a list of science methods and supports opening a method detail view.",
+        "Loading, empty, and error states are shown for each data view."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Add frontend flows to create and edit a tip, including a form with title, content, and tags, plus actions to save changes and delete a tip.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Allow users to create, edit, and save their own food preservation tips/secrets."
+        ]
+      },
+      "acceptanceCriteria": [
+        "User can create a new tip from My Tips and see it appear in the list after saving.",
+        "User can edit an existing tip and see updates reflected after saving.",
+        "User can delete a tip and see it removed from the list.",
+        "Form validation prevents saving when required fields (title, content) are empty."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Use React Query for all backend data fetching/mutations and ensure caches are invalidated/refreshed appropriately after create/update/delete operations for tips.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Enable browsing/viewing of saved tips and science methods in a clean, easy-to-use interface."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Lists refresh after tip create/update/delete without requiring a full page reload.",
+        "Science library queries are cached and re-used between navigations.",
+        "Errors from backend calls are surfaced to the user in a readable way."
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Define and apply a consistent visual theme for the app (colors, typography, spacing, and component styling) with a distinct “warm kitchen notebook” aesthetic using earthy tones (avoid blue/purple) across all screens.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "I’ll build a clean, easy app where users can add their preservation tips and view basic science methods that help keep food safe and lasting longer."
+        ]
+      },
+      "acceptanceCriteria": [
+        "All primary screens share consistent typography, color palette, and spacing scale.",
+        "Buttons, inputs, cards, and headings follow a coherent style.",
+        "No default-looking unstyled pages remain."
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Add a frontend static-assets integration for generated images by rendering them from frontend/public/assets/generated (e.g., logo/hero/section icons) and using them in the header and/or empty states without routing images through the backend.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "I’ll build a clean, easy app where users can add their preservation tips and view basic science methods that help keep food safe and lasting longer."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Generated images exist under frontend/public/assets/generated and are referenced directly by the frontend.",
+        "At least a logo and one section illustration/icon are displayed in the UI.",
+        "No backend endpoints are created for serving images."
+      ]
+    }
+  ],
+  "constraints": [
+    "Use English for all user-facing text.",
+    "Backend must remain a single Motoko actor (all logic in backend/main.mo).",
+    "Do not edit files under frontend/src/components/ui or other immutable paths listed in system context; compose them instead.",
+    "Do not introduce external databases or third-party auth providers; only Internet Identity is allowed if authentication is needed."
+  ],
+  "nonGoals": [
+    "Real-time collaboration or live updates (no websockets).",
+    "Social sharing integrations.",
+    "Maps/geolocation features.",
+    "Payments or subscriptions.",
+    "AI/LLM-generated content integrations."
+  ],
+  "imageRequirements": {
+    "required": [
+      "Warm kitchen notebook-style app logo: a simple line-art jar and leaf with hand-drawn feel on a cream background (app-logo.dim_512x512.png)",
+      "Wide hero banner illustration of a pantry shelf with jars, labels, and subtle texture in earthy tones (hero-pantry.dim_1600x600.png)",
+      "Minimal icon set (3 icons) in consistent line style: jar, snowflake, salt (icons-set.dim_384x128.png)"
+    ],
+    "edits": []
+  }
+}
